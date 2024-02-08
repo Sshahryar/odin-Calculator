@@ -4,6 +4,6 @@ Fifth project from "The Odin Project" (TOP) open source web developing curriculu
 
 Web app project, creating a on-screen calculator. 
 
-Final project from foundations course. 
+Final project from the foundations course. 
 
 Web app:
