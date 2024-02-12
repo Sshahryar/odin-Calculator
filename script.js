@@ -81,3 +81,7 @@ document.getElementById('clear').addEventListener('click', () => {
   updateDisplay('0');
 });
 
+function updateDisplay(value) {
+  document.getElementById('display').innerText = value || '0';
+}
+
