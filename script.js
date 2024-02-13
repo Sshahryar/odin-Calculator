@@ -1,6 +1,7 @@
 let firstNumber = '';
 let operator = '';
 let secondNumber = '';
+let displayValue = '0';
 
 function add(a, b) {
   return a + b;
@@ -36,52 +37,29 @@ function operate(operator, a, b) {
   }
 }
 
-function updateDisplay(value) {
-  document.getElementById('display').innerText = value;
+function updateDisplay() {
+  document.getElementById('display').innerText = displayValue;
 }
 
 document.querySelectorAll('.number').forEach(button => {
   button.addEventListener('click', () => {
     if (operator === '') {
       firstNumber += button.innerText;
-      updateDisplay(firstNumber);
+      displayValue = firstNumber;
     } else {
       secondNumber += button.innerText;
-      updateDisplay(secondNumber);
+      displayValue = secondNumber;
     }
+    updateDisplay();
   });
-});
-
-document.querySelectorAll('.operator').forEach(button => {
-  button.addEventListener('click', () => {
-    if (firstNumber !== '' && secondNumber !== '') {
-      const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
-      updateDisplay(result);
-      firstNumber = result.toString();
-      secondNumber = '';
-    }
-    operator = button.innerText;
-  });
-});
-
-document.getElementById('equals').addEventListener('click', () => {
-  if (firstNumber !== '' && operator !== '' && secondNumber !== '') {
-    const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
-    updateDisplay(result);
-    firstNumber = result.toString();
-    operator = '';
-    secondNumber = '';
-  }
 });
 
 document.getElementById('clear').addEventListener('click', () => {
   firstNumber = '';
   operator = '';
   secondNumber = '';
-  updateDisplay('0');
+  displayValue = '0';
+  updateDisplay();
 });
 
-function updateDisplay(value) {
-  document.getElementById('display').innerText = value || '0';
-}
 
