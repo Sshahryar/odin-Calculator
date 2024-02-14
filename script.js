@@ -54,6 +54,30 @@ document.querySelectorAll('.number').forEach(button => {
   });
 });
 
+document.querySelectorAll('.operator').forEach(button => {
+  button.addEventListener('click', () => {
+    if (firstNumber !== '' && secondNumber !== '') {
+      const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+      displayValue = result.toString();
+      updateDisplay();
+      firstNumber = displayValue;
+      secondNumber = '';
+    }
+    operator = button.innerText;
+  });
+});
+
+document.getElementById('equals').addEventListener('click', () => {
+  if (firstNumber !== '' && operator !== '' && secondNumber !== '') {
+    const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+    displayValue = result.toString();
+    updateDisplay();
+    firstNumber = displayValue;
+    operator = '';
+    secondNumber = '';
+  }
+});
+
 document.getElementById('clear').addEventListener('click', () => {
   firstNumber = '';
   operator = '';
