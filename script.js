@@ -67,6 +67,19 @@ document.querySelectorAll('.operator').forEach(button => {
   });
 });
 
+document.getElementById('decimal').addEventListener('click', () => {
+  if (!displayValue.includes('.')) {
+    if (operator === '') {
+      firstNumber += '.';
+      displayValue = firstNumber;
+    } else {
+      secondNumber += '.';
+      displayValue = secondNumber;
+    }
+    updateDisplay();
+  }
+});
+
 document.getElementById('equals').addEventListener('click', () => {
   if (firstNumber !== '' && operator !== '' && secondNumber !== '') {
     const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
