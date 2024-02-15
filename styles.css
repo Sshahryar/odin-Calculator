@@ -43,3 +43,8 @@ button#decimal {
   background-color: #3498db; 
 }
 
+button#backspace {
+  background-color: #e74c3c; 
+  color: #fff;
+}
+
