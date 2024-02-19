@@ -41,33 +41,29 @@ function updateDisplay() {
   document.getElementById('display').innerText = displayValue;
 }
 
-document.querySelectorAll('.number').forEach(button => {
-  button.addEventListener('click', () => {
-    if (operator === '') {
-      firstNumber += button.innerText;
-      displayValue = firstNumber;
-    } else {
-      secondNumber += button.innerText;
-      displayValue = secondNumber;
-    }
+function handleNumberPress(key) {
+  if (operator === '') {
+    firstNumber += key;
+    displayValue = firstNumber;
+  } else {
+    secondNumber += key;
+    displayValue = secondNumber;
+  }
+  updateDisplay();
+}
+
+function handleOperatorPress(key) {
+  if (firstNumber !== '' && secondNumber !== '') {
+    const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+    displayValue = result.toString();
     updateDisplay();
-  });
-});
+    firstNumber = displayValue;
+    secondNumber = '';
+  }
+  operator = key;
+}
 
-document.querySelectorAll('.operator').forEach(button => {
-  button.addEventListener('click', () => {
-    if (firstNumber !== '' && secondNumber !== '') {
-      const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
-      displayValue = result.toString();
-      updateDisplay();
-      firstNumber = displayValue;
-      secondNumber = '';
-    }
-    operator = button.innerText;
-  });
-});
-
-document.getElementById('equals').addEventListener('click', () => {
+function handleEqualsPress() {
   if (firstNumber !== '' && operator !== '' && secondNumber !== '') {
     const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
     displayValue = result.toString();
@@ -76,15 +72,32 @@ document.getElementById('equals').addEventListener('click', () => {
     operator = '';
     secondNumber = '';
   }
-});
+}
 
-document.getElementById('clear').addEventListener('click', () => {
+function handleClearPress() {
   firstNumber = '';
   operator = '';
   secondNumber = '';
   displayValue = '0';
   updateDisplay();
-});
+}
+
+document.addEventListener('keypress', handleKeyPress);
+
+function handleKeyPress(event) {
+  const key = event.key;
+
+  if (key >= '0' && key <= '9') {
+    handleNumberPress(key);
+  } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+    handleOperatorPress(key);
+  } else if (key === 'Enter' || key === '=') {
+    handleEqualsPress();
+  } else if (key === 'Escape' || key === 'c') {
+    handleClearPress();
+  }
+}
+
 
 
 
