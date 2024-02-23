@@ -82,9 +82,30 @@ function handleClearPress() {
   updateDisplay();
 }
 
-document.addEventListener('keypress', handleKeyPress);
+document.addEventListener('DOMContentLoaded', () => {
+  const numberButtons = document.querySelectorAll('.number');
+  const operatorButtons = document.querySelectorAll('.operator');
+  const equalsButton = document.getElementById('equals');
+  const clearButton = document.getElementById('clear');
+  const decimalButton = document.getElementById('decimal');
 
-function handleKeyPress(event) {
+  numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      handleNumberPress(button.innerText);
+    });
+  });
+
+  operatorButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      handleOperatorPress(button.innerText);
+    });
+  });
+
+  equalsButton.addEventListener('click', handleEqualsPress);
+  clearButton.addEventListener('click', handleClearPress);
+});
+
+document.addEventListener('keydown', (event) => {
   const key = event.key;
 
   if ((key >= '0' && key <= '9') || key === '.') {
@@ -95,7 +116,5 @@ function handleKeyPress(event) {
     handleEqualsPress();
   } else if (key === 'Escape' || key === 'c') {
     handleClearPress();
-  } else {
-    event.preventDefault(); 
   }
-}
+});
