@@ -87,7 +87,7 @@ document.addEventListener('keypress', handleKeyPress);
 function handleKeyPress(event) {
   const key = event.key;
 
-  if (key >= '0' && key <= '9') {
+  if ((key >= '0' && key <= '9') || key === '.') {
     handleNumberPress(key);
   } else if (key === '+' || key === '-' || key === '*' || key === '/') {
     handleOperatorPress(key);
@@ -95,10 +95,7 @@ function handleKeyPress(event) {
     handleEqualsPress();
   } else if (key === 'Escape' || key === 'c') {
     handleClearPress();
+  } else {
+    event.preventDefault(); 
   }
 }
-
-
-
-
-
