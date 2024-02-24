@@ -6,4 +6,4 @@ Web app project, creating a on-screen calculator.
 
 Final project from the foundations course. 
 
-Web app:
+Web app: https://sshahryar.github.io/odin-Calculator/
